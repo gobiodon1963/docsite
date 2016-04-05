@@ -94,6 +94,7 @@ def LoadProductsFromCSV(fname):
 def getProducts2Import(items):
     result=[]
     for key,val in items.items():
+#        print (key, val)
         try:
             p=Product.objects.get(art=key)
         except Product.DoesNotExist:

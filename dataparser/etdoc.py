@@ -56,6 +56,8 @@ def getDistrItem(attr):
     item['QTY'] = attr[u'Количество'].strip()
     item['SUM'] = attr[u'СуммаСНДС'].strip()
     item['NET_WEIGHT'] = attr[u'ВесЕдиницы'].strip()
+    if item['NET_WEIGHT'] == '':
+        item['NET_WEIGHT'] = '0.0'
     item['WIDTH'] = attr[u'Ширина'].strip()
     item['HEIGHT'] = attr[u'Высота'].strip()
     item['PROFIL'] = attr[u'Профиль'].strip()
