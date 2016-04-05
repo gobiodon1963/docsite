@@ -1,0 +1,17 @@
+﻿{% extends "base.html" %}
+{% block title %}Импорт документов из XML{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}
+Сейчас {{ current_date }}
+<ul>
+    <li><a href="home/load_items/">Обновить номенклатуру</a></li>
+    <li><a href="home/load_apls/">Обновить контрагентов</a></li>
+</ul>
+
+{% for message in messages %}
+    <li>{{ message }}</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
+{% block footer %}{% endblock %}
