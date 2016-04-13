@@ -171,9 +171,11 @@ def fillAccInfo(doc):
     if doc['ACC'] == 'Безналичная':
         doc['ACC'] = 'ДЕСАТ_'+doc['CUR'][:3]
         doc['SERIES'] = '65-'+doc['DATE'][:4]
+        doc['ACCNO'] = '65'
     if doc['ACC'] == 'Наличная':
         doc['SERIES'] = ''
         doc['ACC'] = 'ПИТЕР_НАЛ'
+        doc['ACCNO'] = '42'
 
 def fillDocInfo(docs):
     for doc in docs:
@@ -186,7 +188,7 @@ def saveDocs2CSV(fname, docs):
         if doc['TYPE'] == 'SI':
             for item in doc['TABLE']:
                 fout.write("@D;%s;%s;%s;%f;0;0\n" % (item['ID'], item['QTY'], item['QTY'], float(item['SUM'])/float(item['QTY'])))
-            fout.write("@H;%s;4;%s;%s;%s;%s;%s;%s;%.9e;%d;%s;%.9e;%s;%s;%s;;0\n" % (doc['NO'], doc['DATE'], doc['APL'], doc['HLD'], 'PITER_ST', doc['ACC'], doc['CUR'][:3], 1.0/doc['RATE'], 0, doc['CUR'][:3], 1.0/doc['RATE'], doc['SUM'], doc['SERIES'], doc['NUMBER']))
+            fout.write("@H;%s;4;%s;%s;%s;%s;%s;%s;%.9e;%d;%s;%.9e;%s;%s;%s;;0;%s\n" % (doc['NO'], doc['DATE'], doc['APL'], doc['HLD'], 'PITER_ST', doc['ACC'], doc['CUR'][:3], 1.0/doc['RATE'], 0, doc['CUR'][:3], 1.0/doc['RATE'], doc['SUM'], doc['SERIES'], doc['NUMBER'], doc['ACCNO']))
     fout.close()
 
 def prepareData():
