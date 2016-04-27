@@ -66,6 +66,13 @@ class Contractor(models.Model):
     need_to_import = models.BooleanField(default=False, verbose_name=u'Нужен импорт')
     hld = models.CharField(max_length=20, verbose_name=u'Холдинг', default='', blank=True)
 
+class GoodsQty(models.Model):
+    art = models.CharField(max_length=20, verbose_name=u'Артикул')
+    stock_id = models.CharField(max_length=20, verbose_name=u'Склад')
+    gtd = models.CharField(max_length=30, verbose_name=u'ГТД')
+    paid = models.BooleanField(default=False, verbose_name=u'Оплачен')
+    qty = models.FloatField(default=1, verbose_name=u'Количество')
+
 def LoadProductsFromCSV(fname):
     start_time = time.time()
 #    try:
@@ -185,8 +192,8 @@ def saveDocs2CSV(fname, docs):
     for doc in docs:
         if doc['TYPE'] == 'SI':
             for item in doc['TABLE']:
-                fout.write("@D;%s;%s;%s;%f;0;0\n" % (item['ID'], item['QTY'], item['QTY'], float(item['SUM'])/float(item['QTY'])))
-            fout.write("@H;%s;4;%s;%s;%s;%s;%s;%s;%.9e;%d;%s;%.9e;%s;%s;%s;;0\n" % (doc['NO'], doc['DATE'], doc['APL'], doc['HLD'], 'PITER_ST', doc['ACC'], doc['CUR'][:3], 1.0/doc['RATE'], 0, doc['CUR'][:3], 1.0/doc['RATE'], doc['SUM'], doc['SERIES'], doc['NUMBER']))
+                fout.write("@D;%s;%s;%s;%f;0;0;%s;%s\n" % (item['ID'], item['QTY'], item['QTY'], float(item['SUM'])/float(item['QTY']), item['GTD'], item['STRANA']))
+            fout.write("@H;%s;4;%s;%s;%s;%s;%s;%s;%.9e;%d;%s;%.9e;%s;%s;%s;;0;65\n" % (doc['NO'], doc['DATE'], doc['APL'], doc['HLD'], 'PITER_OPEN', doc['ACC'], doc['CUR'][:3], 1.0/doc['RATE'], 0, doc['CUR'][:3], 1.0/doc['RATE'], doc['SUM'], doc['SERIES'], doc['NUMBER']))
     fout.close()
 
 def prepareData():
