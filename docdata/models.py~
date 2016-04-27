@@ -73,6 +73,23 @@ class GoodsQty(models.Model):
     paid = models.BooleanField(default=False, verbose_name=u'Оплачен')
     qty = models.FloatField(default=1, verbose_name=u'Количество')
 
+def LoadGoodsFromCSV(fname):
+    start_time = time.time()
+    csv.register_dialect('tradecsv', delimiter=';')
+    with open(fname) as csvfile:
+        reader = csv.DictReader(csvfile,dialect='tradecsv')
+        i = 0
+        print('Cleaning goods table...')
+        GoodsQty.objects.all().delete()
+        print('Done.')
+        for row in reader:
+            g=Product(art=row['id'], stock_id=row['stock_id'], gtd=row['gtd'], paid=row['paid'], qty=row['qty'])
+            g.save()
+            i += 1
+            print(i, art=row['id'], row['stock_id'], row['gtd'], row['paid'], row['qty'])
+    return "Создано %d записей за %d секунд" % (i, time.time() - start_time)
+
+
 def LoadProductsFromCSV(fname):
     start_time = time.time()
 #    try:
