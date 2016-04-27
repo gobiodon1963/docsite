@@ -86,7 +86,7 @@ def LoadGoodsFromCSV(fname):
             g=Product(art=row['id'], stock_id=row['stock_id'], gtd=row['gtd'], paid=row['paid'], qty=row['qty'])
             g.save()
             i += 1
-            print(i, art=row['id'], row['stock_id'], row['gtd'], row['paid'], row['qty'])
+            print(i, row['id'], row['stock_id'], row['gtd'], row['paid'], row['qty'])
     return "Создано %d записей за %d секунд" % (i, time.time() - start_time)
 
 
