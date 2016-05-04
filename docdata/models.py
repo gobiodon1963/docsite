@@ -211,13 +211,8 @@ def saveDocs2CSV(fname, docs):
     for doc in docs:
         if doc['TYPE'] == 'SI':
             for item in doc['TABLE']:
-<<<<<<< HEAD
                 fout.write("@D;%s;%s;%s;%f;0;0\n" % (item['ID'], item['QTY'], item['QTY'], float(item['SUM'])/float(item['QTY'])))
             fout.write("@H;%s;4;%s;%s;%s;%s;%s;%s;%.9e;%d;%s;%.9e;%s;%s;%s;;0;%s\n" % (doc['NO'], doc['DATE'], doc['APL'], doc['HLD'], 'PITER_ST', doc['ACC'], doc['CUR'][:3], 1.0/doc['RATE'], 0, doc['CUR'][:3], 1.0/doc['RATE'], doc['SUM'], doc['SERIES'], doc['NUMBER'], doc['ACCNO']))
-=======
-                fout.write("@D;%s;%s;%s;%f;0;0;%s;%s\n" % (item['ID'], item['QTY'], item['QTY'], float(item['SUM'])/float(item['QTY']), item['GTD'], item['STRANA']))
-            fout.write("@H;%s;4;%s;%s;%s;%s;%s;%s;%.9e;%d;%s;%.9e;%s;%s;%s;;0;65\n" % (doc['NO'], doc['DATE'], doc['APL'], doc['HLD'], 'PITER_OPEN', doc['ACC'], doc['CUR'][:3], 1.0/doc['RATE'], 0, doc['CUR'][:3], 1.0/doc['RATE'], doc['SUM'], doc['SERIES'], doc['NUMBER']))
->>>>>>> origin/master
     fout.close()
 
 def prepareData():
