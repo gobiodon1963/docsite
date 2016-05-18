@@ -176,13 +176,19 @@ def loadCLinux():
     return LoadContractorsFromCSV(r'./../exch_data/apls2.csv')
 
 def save2CSV(fname, data_arr, fnames):
-    with open(fname, 'w') as csvfile:
-        writer=csv.DictWriter(csvfile, delimiter=';', fieldnames=fnames)
-        writer.writerow(dict((fn,fn) for fn in fnames))
+#    with open(fname, 'w') as csvfile:
+#        writer=csv.DictWriter(csvfile, delimiter=';', fieldnames=fnames)
+#        writer.writerow(dict((fn,fn) for fn in fnames))
+#        for row in data_arr:
+#            writer.writerow(row)
+    with open(fname,'wb') as csvfile:
+        csvfile.write((";".join(fnames)+"\r\n").encode('cp1251'))
         for row in data_arr:
-            writer.writerow(row)
-    pass
-
+            v = []
+            for key in fnames:
+                v.append(row[key])
+            csvfile.write((";".join(v)+"\r\n").encode('cp1251'))
+ 
 def fillAplID(doc):
     doc['APL']=''
     doc['HLD']=''
@@ -192,15 +198,13 @@ def fillAplID(doc):
         doc['HLD']=q.hld
 
 def fillAccInfo(doc):
-    doc['SERIES'] = '???'
+    doc['SERIES'] = ''
+    doc['ACC'] = 'ПИТЕР_НАЛ'
+    doc['ACCNO'] = '42'
     if doc['ACC'] == 'Безналичная':
         doc['ACC'] = 'ДЕСАТ_'+doc['CUR'][:3]
         doc['SERIES'] = '65-'+doc['DATE'][:4]
         doc['ACCNO'] = '65'
-    if doc['ACC'] == 'Наличная':
-        doc['SERIES'] = ''
-        doc['ACC'] = 'ПИТЕР_НАЛ'
-        doc['ACCNO'] = '42'
 
 def fillDocInfo(docs):
     for doc in docs:
