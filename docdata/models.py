@@ -149,6 +149,7 @@ def LoadContractorsFromCSV(fname):
             c.inn = row['inn']
             c.kpp = row['kpp']
             c.address = row['address']
+            c.hld = row['hld']
             c.save()
             i += 1
             print(i, row['apl_id'],row['inn'],row['kpp'])

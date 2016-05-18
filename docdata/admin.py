@@ -12,7 +12,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('art', 'name', 'unit_id', 'unit_code', 'need_to_import')
     
 class ContractorAdmin(admin.ModelAdmin):
-    list_display = ('apl_id', 'name', 'inn', 'kpp', 'need_to_import')
+    list_display = ('apl_id', 'name', 'inn', 'kpp', 'need_to_import', 'hld')
     
 # Register your models here.
 
