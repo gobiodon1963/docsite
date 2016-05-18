@@ -199,12 +199,13 @@ def fillAplID(doc):
 
 def fillAccInfo(doc):
     doc['SERIES'] = ''
-    doc['ACC'] = 'ПИТЕР_НАЛ'
     doc['ACCNO'] = '42'
     if doc['ACC'] == 'Безналичная':
         doc['ACC'] = 'ДЕСАТ_'+doc['CUR'][:3]
         doc['SERIES'] = '65-'+doc['DATE'][:4]
         doc['ACCNO'] = '65'
+    if doc['ACC'] == 'Наличная':
+        doc['ACC'] = 'ПИТЕР_НАЛ'
 
 def fillDocInfo(docs):
     for doc in docs:
