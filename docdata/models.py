@@ -198,13 +198,16 @@ def fillAplID(doc):
         doc['HLD']=q.hld
 
 def fillAccInfo(doc):
-    doc['SERIES'] = ''
-    doc['ACCNO'] = '42'
-    if doc['ACC'] == 'Безналичная':
+    if doc['NO'][:2] = 'Де':    # Безналичная
         doc['ACC'] = 'ДЕСАТ_'+doc['CUR'][:3]
-        doc['SERIES'] = '65-'+doc['DATE'][:4]
         doc['ACCNO'] = '65'
-    if doc['ACC'] == 'Наличная':
+        if doc['NUMBER'] = '':
+            doc['SERIES'] = '65-????'
+        else:
+            doc['SERIES'] = '65-'+doc['DATE'][:4]
+    else:                       # Наличная
+        doc['SERIES'] = ''
+        doc['ACCNO'] = '42'
         doc['ACC'] = 'ПИТЕР_НАЛ'
 
 def fillDocInfo(docs):
