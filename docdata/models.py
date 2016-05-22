@@ -198,10 +198,10 @@ def fillAplID(doc):
         doc['HLD']=q.hld
 
 def fillAccInfo(doc):
-    if doc['NO'][:2] = 'Де':    # Безналичная
+    if doc['NO'][:2] == 'Де':    # Безналичная
         doc['ACC'] = 'ДЕСАТ_'+doc['CUR'][:3]
         doc['ACCNO'] = '65'
-        if doc['NUMBER'] = '':
+        if doc['NUMBER'] == '':
             doc['SERIES'] = '65-????'
         else:
             doc['SERIES'] = '65-'+doc['DATE'][:4]
@@ -238,8 +238,8 @@ def prepareData():
     fin = open(r'./../exch_data/exch_data.xml','r')
     parseData(fin,docs,items,apls)
     fin.close()
-    save2CSV(r'./../exch_data/new_items.csv', getProducts2Import(items), ['id','descr','spec', 'units', 'unit_code', 'net_weight'])
-    save2CSV(r'./../exch_data/new_apls.csv', getContractors2Import(apls), ['apl_id', 'name', 'inn', 'kpp', 'address'])
+    save2CSV(r'./../exch_data/new_items.csv', getProducts2Import(items), ['id','descr','spec', 'units', 'unit_code', 'net_weight', 'cat', 'man'])
+    save2CSV(r'./../exch_data/new_apls.csv', getContractors2Import(apls), ['apl_id', 'name', 'inn', 'kpp', 'address', 'cat', 'hld', 'cust'])
     fillDocInfo(docs)
     saveDocs2CSV(r'./../exch_data/new_doc.csv', docs)
 

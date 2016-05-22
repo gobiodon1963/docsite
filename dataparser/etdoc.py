@@ -86,14 +86,14 @@ def parseData(file_in,docs,items,apls):
                     i_table.append(d_item)
 
                     if d_item['ID'] not in items:
-                        items[d_item['ID']] = {'id':d_item['ID'], 'descr':d_item['DESCR'], 'spec':d_item['SPEC'], 'units':d_item['UNITS'], 'unit_code':d_item['UNIT_CODE'], 'net_weight': d_item['NET_WEIGHT']}
+                        items[d_item['ID']] = {'id':d_item['ID'], 'descr':d_item['DESCR'], 'spec':d_item['SPEC'], 'units':d_item['UNITS'], 'unit_code':d_item['UNIT_CODE'], 'net_weight': d_item['NET_WEIGHT'], 'cat':'SCREEN', 'man':'PIT'}
 
                 doc = getDocHeader('SI',getAttributes(obj),i_table)
                 docs.append(doc)
 
                 apl_key = doc['INN']+"/"+doc['KPP']
                 if apl_key not in apls:
-                    apls[apl_key] = {'apl_id':'', 'name':doc['NAME'], 'inn':doc['INN'], 'kpp':doc['KPP'], 'address' : doc['ADDRESS']}
+                    apls[apl_key] = {'apl_id':'', 'name':doc['NAME'], 'inn':doc['INN'], 'kpp':doc['KPP'], 'address' : doc['ADDRESS'], 'cat':'SCREEN_P', 'hld':'ПИТЕР', 'cust':'1'}
 
 #       Оплата Покупателя
         if doc_type == u'ОплатаПокупателя':
